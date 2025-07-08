@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+:root {
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --primary-color: #9fef89;
+  --secondary-color: #e7e7e7;
+  --accent-color: #e74c3c;
+  --hover-color: #2980b9;
+  --income-background: #dff0d8;
+  --expense-background: #f2dede;
+  --section-background: #f9f9f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #a8e063, #56ab2f);
+  font-family: 'Lato', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  transition: background 0.5s ease;
+}
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 80px;
+  background: rgba(255, 255, 255, 0.6); /* changed */
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  backdrop-filter: blur(10px); /* added */
+  animation: fadeInUp 0.8s ease;
+}
+
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1, h2, h3, h4 {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.inc_exp-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.inc_exp-container > div {
+  background-color: var(--hover-color);
+  flex: 1;
+  min-width: 130px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+input[type='text'], input[type='number'] {
+  border: 1px solid var(--secondary-color);
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(159, 239, 137, 0.7);
+  outline: none;
+}
+
+.button, .delete-btn {
+  background-color: var(--primary-color);
+  color: #000;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.button:hover, .delete-btn:hover {
+  background-color: var(--hover-color);
+  color: #fff;
+}
+
+.button:active::after, .delete-btn:active::after {
+  content: "";
+  background: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(4);
+  opacity: 0;
+  pointer-events: none;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.list li {
+  background-color: var(--section-background);
+  border-left: 5px solid var(--primary-color);
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list li:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.list li.plus {
+  background-color: var(--income-background);
+}
+
+.list li.minus {
+  background-color: var(--expense-background);
+  border-left-color: var(--accent-color);
+}
+
+.delete-btn {
+  background-color: var(--primary-color);
+  color: red;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  width: auto;
+  min-width: 40px;
+}
+
+.delete-btn:hover {
+  background-color: var(--hover-color);
+  color: white;
+}
+
+/* Theme switch toggle */
+.theme-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.theme-switch input[type="checkbox"] {
+  display: none;
+}
+
+.slider {
+  width: 50px;
+  height: 26px;
+  background-color: #ccc;
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}
+
+.slider::before {
+  content: "🌙";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 2px;
+  top: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s;
+}
+
+.theme-switch input:checked + .slider {
+  background-color: #56ab2f;
+}
+
+.theme-switch input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+/* Optional: Dark mode styles */
+[data-theme="dark"] body {
+  background: linear-gradient(135deg, #2c3e50, #000000);
+  color: white;
+}
+
+[data-theme="dark"] .container {
+  background: #222;
+  color: white;
+}
+
+[data-theme="dark"] .list li {
+  background: #333;
+}
+
+[data-theme="dark"] input, 
+[data-theme="dark"] .button, 
+[data-theme="dark"] .delete-btn {
+  background-color: #444;
+  color: white;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  color: black;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 999;
+}
+.toast.show {
+  opacity: 1;
+}
+
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.fab:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+  .inc_exp-container {
+    flex-direction: column;
+  }
+
+  .button, .delete-btn {
+    width: 100%;
+  }
+}
